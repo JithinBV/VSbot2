@@ -20,6 +20,8 @@ def main():
     st.header("Ask your CSV(agent)")
  
     user_csv = st.file_uploader("Upload your CSV file", type='csv', accept_multiple_files=True)
+    user_question = st.text_input("ASK YOUR QUESTION:")
+
     data_list = []
  
     if user_csv is not None:
@@ -31,7 +33,6 @@ def main():
             Ilm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)  # Corrected 'temperatur' to 'temperature'
             agent = create_pandas_dataframe_agent(Ilm, df, verbose=True)
          
-         user_question = st.text_input("ASK YOUR QUESTION:")
 
             if user_question is not None and user_question != "":
              response = agent.run(user_question)
