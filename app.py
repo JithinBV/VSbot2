@@ -26,7 +26,7 @@ def main():
         st.write(f)
         data_list = []
         for f in user_csv:
-            data = pd.read_csv(f)
+            data = pd.read_csv(f,delim_whitespace=True)
             data_list.append(data)
             df = pd.concat(data_list)
     
