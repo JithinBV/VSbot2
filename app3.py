@@ -30,17 +30,18 @@ def main():
             df = pd.concat(data_list,ignore_index=True)
             Ilm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)  # Corrected 'temperatur' to 'temperature'
             agent = create_pandas_dataframe_agent(Ilm, df, verbose=True)
-
          
- 
-        user_question = st.text_input("ASK YOUR QUESTION:")
- 
- 
+         user_question = st.text_input("ASK YOUR QUESTION:")
 
             if user_question is not None and user_question != "":
              response = agent.run(user_question)
              st.spinner("Generating response.....")
              st.write(response)
  
+
+ 
+ 
+
+            
 if __name__ == "__main__":  # Corrected "__main__" with double underscores
     main()
