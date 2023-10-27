@@ -37,11 +37,11 @@ def main():
  
  
  
-        if user_question is not None and user_question != "":
-            response = agent.run(user_question)
- 
-            st.spinner("Generating response.....")
-            st.write(response)
+            if user_question is not None and user_question != "":
+                response = agent.run(user_question)
+     
+                st.spinner("Generating response.....")
+                st.write(response)
  
 if __name__ == "__main__":  # Corrected "__main__" with double underscores
     main()
