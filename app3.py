@@ -27,6 +27,7 @@ def main():
     
     if user_csv is not None:
         for file in user_csv:
+            df_list[]
             data = pd.read_csv(file)
             df_list.append(data)
             df = pd.concat(df_list)
