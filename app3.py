@@ -33,7 +33,7 @@ def main():
  
         Ilm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)  # Corrected 'temperatur' to 'temperature'
  
-        agent = create_pandas_dataframe_agent(Ilm, df, verbose=True)
+        agent = create_pandas_dataframe_agent(Ilm, user_csv, verbose=True)
  
         if user_question is not None and user_question != "":
             response = agent.run(user_question)
