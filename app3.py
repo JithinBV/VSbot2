@@ -28,7 +28,6 @@ def main():
         for f in user_csv:
             data = pd.read_csv(f)
             data_list.append(data)
-        if data_list:
             df = pd.concat(data_list,ignore_index=True)
             Ilm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)  # Corrected 'temperatur' to 'temperature'
             agent = create_pandas_dataframe_agent(Ilm, df, verbose=True)
