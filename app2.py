@@ -29,10 +29,10 @@ def main():
         for f in user_csv:
             data_list = []
             data = pd.read_csv(f)
-            data_list.append(data)
-            df = pd.concat(data_list)
+            #data_list.append(data)
+            #df = pd.concat(data_list)
             llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
-            agent = create_pandas_dataframe_agent(llm,df,verbose=True)
+            agent = create_pandas_dataframe_agent(llm,data,verbose=True)
             if user_question is not None and user_question != "":
                 response = agent.run(user_question)
                 st.spinner("Generating response.....")
