@@ -27,8 +27,8 @@ def main():
     
     if user_csv is not None:
         for file in user_csv:
-            df_temp = pd.read_csv(file)
-            df_list.append(df_temp, ignore_index=True)
+            data = pd.read_csv(file)
+            df_list.append(data)
             df = pd.concat(df_list)
             llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
             agent = create_pandas_dataframe_agent(llm,df,verbose=True)
