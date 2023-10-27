@@ -30,7 +30,7 @@ def main():
             data_list.append(data)
             df = pd.concat(data_list)
     
-    if user_csv is not None:
+    if df is not None:
         
        
         
