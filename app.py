@@ -30,23 +30,14 @@ def main():
             data_list.append(data)
             df = pd.concat(data_list)
     
-    if df is not None:
-        
-       
-        
-    
-        user_question= st.text_input("ASK YOUR QUESTION:")
-        
-        
-        llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
-
-        agent = create_pandas_dataframe_agent(llm,df,verbose=True,agent_executor_kwargs={"handle_parsing_errors":True})
-        
-        if user_question is not None and user_question != "":
-            response = agent.run(user_question)
-            
-            st.spinner("Generating response.....")
-            st.write(response)
+        if df is not None:
+            user_question= st.text_input("ASK YOUR QUESTION:")
+            llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
+            agent = create_pandas_dataframe_agent(llm,df,verbose=True)
+            if user_question is not None and user_question != "":
+                response = agent.run(user_question)
+                st.spinner("Generating response.....")
+                st.write(response)
             
 
 
