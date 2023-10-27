@@ -26,8 +26,8 @@ def main():
         for f in user_csv:
             data = pd.read_csv(f)
             data_list.append(data)
- 
-        df = pd.concat(data_list)
+        if data_list:
+            df = pd.concat(data_list,ignore_index=True)
  
         user_question = st.text_input("ASK YOUR QUESTION:")
  
