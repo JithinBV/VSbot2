@@ -29,6 +29,7 @@ def main():
         for file in user_csv:
             df_temp = pd.read_csv(file)
             df_append = df_append.append(df_temp, ignore_index=True)
+            df = pd.concat(df_append,ignore_index=True)
             llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
             agent = create_pandas_dataframe_agent(llm,df_append,verbose=True)
             if user_question is not None and user_question != "":
