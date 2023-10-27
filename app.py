@@ -33,7 +33,7 @@ def main():
         if df is not None:
             user_question= st.text_input("ASK YOUR QUESTION:")
             llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
-            agent = create_pandas_dataframe_agent(llm,df,verbose=True)
+            agent = create_pandas_dataframe_agent(llm,df,agent_executor_kwargs={"handle_parsing_errors":True},verbose=True)
             if user_question is not None and user_question != "":
                 response = agent.run(user_question)
                 st.spinner("Generating response.....")
