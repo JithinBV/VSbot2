@@ -4,9 +4,7 @@ from langchain.llms import AzureOpenAI
 import pandas as pd
 
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
 os.environ["OPENAI_API_BASE"] = os.environ["AZURE_OPENAI_ENDPOINT"] = 'https://aoiaipsi.openai.azure.com/'
 
 os.environ["OPENAI_API_KEY"] = os.environ["AZURE_OPENAI_API_KEY"] = 'f769445c82844edda56668cb92806c21'
