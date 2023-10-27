@@ -28,8 +28,8 @@ def main():
     if user_csv is not None:
         for file in user_csv:
             df_temp = pd.read_csv(file)
-            df_append.append(df_temp, ignore_index=True)
-            df = pd.concat(df_append,ignore_index=True)
+            df_list.append(df_temp, ignore_index=True)
+            df = pd.concat(df_list)
             llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
             agent = create_pandas_dataframe_agent(llm,df,verbose=True)
             if user_question is not None and user_question != "":
