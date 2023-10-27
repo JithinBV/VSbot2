@@ -28,12 +28,14 @@ def main():
             data_list.append(data)
         if data_list:
             df = pd.concat(data_list,ignore_index=True)
+            Ilm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)  # Corrected 'temperatur' to 'temperature'
+            agent = create_pandas_dataframe_agent(Ilm, df, verbose=True)
+
+         
  
         user_question = st.text_input("ASK YOUR QUESTION:")
  
-        Ilm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)  # Corrected 'temperatur' to 'temperature'
  
-        agent = create_pandas_dataframe_agent(Ilm, user_csv, verbose=True)
  
         if user_question is not None and user_question != "":
             response = agent.run(user_question)
