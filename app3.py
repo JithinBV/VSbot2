@@ -1,7 +1,10 @@
-import streamlit as  st
-from langchain.agents import create_csv_agent
-from langchain.llms import AzureOpenAI
+import streamlit as st
 import pandas as pd
+from io import StringIO
+import streamlit as st
+from langchain.agents import create_pandas_dataframe_agent
+from langchain.llms import AzureOpenAI
+
 
 import os
 
@@ -15,30 +18,19 @@ os.environ["OPENAI_API_TYPE"] = "azure"
 
 AZURE_OPENAI_NAME = 'gpt-35-turbo-0301'
 
-
-def main():
+uploaded_files = st.file_uploader("Upload CSV", type="csv", accept_multiple_files=True)
+user_question = st.text_input("Your question")
+if uploaded_files:
+    for file in uploaded_files:
+        file.seek(0)
+    uploaded_data_read = [pd.read_csv(file) for file in uploaded_files]
+    raw_data = pd.concat(uploaded_data_read)
+    llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
+    agent = create_pandas_dataframe_agent(llm,raw_data,verbose=True)
     
-    st.set_page_config(page_title="Ask your CSV")
-    st.header("Ask your CSV(agent)")
-    
-    user_csv = st.file_uploader("upload your csv file", type = 'csv', accept_multiple_files=True)
-    user_question= st.text_input("ASK YOUR QUESTION:")
+    if raw_data is not None:
+        response = agent.run(user_question)
+        st.spinner("Generating response.....")
+        st.write(response)
 
     
-    if user_csv is not None:
-        for file in user_csv:
-            df_list=[]
-            data = pd.read_csv(file)
-            df_list.append(data)
-            df = pd.concat(df_list)
-            llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
-            agent = create_csv_agent(llm,df,verbose=True)
-            if user_question is not None and user_question != "":
-                response = agent.run(user_question)
-                st.spinner("Generating response.....")
-                st.write(response)
-            
-
-
-if __name__ == "__main__":
-    main()
