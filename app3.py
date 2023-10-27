@@ -30,12 +30,12 @@ def main():
             df_temp = pd.read_csv(file)
             df_append = df_append.append(df_temp, ignore_index=True)
             return df_append
-        llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
-        agent = create_pandas_dataframe_agent(llm,df_append,verbose=True)
-        if user_question is not None and user_question != "":
-            response = agent.run(user_question)
-            st.spinner("Generating response.....")
-            st.write(response)
+            llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
+            agent = create_pandas_dataframe_agent(llm,df_append,verbose=True)
+            if user_question is not None and user_question != "":
+                response = agent.run(user_question)
+                st.spinner("Generating response.....")
+                st.write(response)
             
 
 
