@@ -22,6 +22,8 @@ def main():
     st.header("Ask your CSV(agent)")
     
     user_csv = st.file_uploader("upload your csv file", type = 'csv', accept_multiple_files=True)
+    user_question= st.text_input("ASK YOUR QUESTION:")
+
     
     if user_csv is not None:
         for f in user_csv:
@@ -29,7 +31,6 @@ def main():
             data = pd.read_csv(f)
             data_list.append(data)
             df = pd.concat(data_list)
-            user_question= st.text_input("ASK YOUR QUESTION:")
             llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
             agent = create_pandas_dataframe_agent(llm,df,verbose=True)
             if user_question is not None and user_question != "":
