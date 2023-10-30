@@ -1,6 +1,6 @@
 from langchain.llms import AzureOpenAI
 from langchain.agents import create_pandas_dataframe_agent
-fromlangchain_experimental.agents import create_pandas_dataframe_agent
+from langchain_experimental.agents import create_pandas_dataframe_agent
 import pandas as pd
 from dotenv import load_dotenv
 import json
