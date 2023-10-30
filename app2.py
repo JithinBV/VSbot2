@@ -29,7 +29,6 @@ def main():
         for f in user_csv:
             data_list = []
             data = pd.read_csv(f)
-            data=pd.set_option('display.max_rows',20)
             data_list.append(data)
             df = pd.concat(data_list)
             llm = AzureOpenAI(deployment_name=AZURE_OPENAI_NAME, temperature=0)
